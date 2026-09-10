@@ -1,0 +1,188 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "traceable-rag"
+version = "0.1.0"
+description = "Source-grounded agentic RAG with traceable execution"
+requires-python = ">=3.11"
+
+dependencies = [
+  # web
+  "fastapi==0.141.1",
+  "uvicorn==0.52.4",
+  "gunicorn==26.2.0",
+  "python-multipart==0.0.32",
+  "requests==2.34.2",
+  "httpx==0.28.1",
+  "python-dotenv",
+
+  # auth
+  "fastapi-jwt[authlib]==0.3.0",
+  "bcrypt",
+
+  # storage
+  "elasticsearch",
+  "elasticsearch-dsl",
+  "psycopg2-binary",
+  "sqlalchemy",
+  "xxhash",
+
+  # providers
+  "openai",
+  "dashscope",
+  "aiohttp",
+  # web search: native-http DuckDuckGo needs no key; Serper needs SERPER_API_KEY.
+  "tiktoken",
+
+  # document parsing (vendored deepdoc)
+  "onnxruntime",
+  "opencv-python",
+  "shapely",
+  "pyclipper",
+  "python-docx",
+  "python-pptx",
+  "pdfplumber",
+  "pypdf",
+  # required by service/parsers/vlm/processor.py for PDF page rendering
+  "PyMuPDF",
+  "openpyxl",
+  "pandas",
+  "readability-lxml",
+  "lxml",
+  "lxml_html_clean",
+  "html-text",
+  "markdown",
+  "chardet",
+  "tika",
+  "huggingface_hub",
+  # The vendored updown_concat_xgb.model requires the pre-3.1 binary loader.
+  "xgboost<3.1",
+
+  # text analysis
+  "nltk",
+  "jieba",
+  "datrie",
+  "hanziconv",
+
+  # graphrag
+  "networkx",
+  "numpy",
+  # misc
+  "beartype",
+  "six",
+  "strenum",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pip-audit>=2.10,<3",
+  "pytest>=8,<10",
+  "pytest-cov>=5,<8",
+  "ruff>=0.9,<1",
+  "mypy>=1.13,<2",
+]
+# EMBEDDING_PROVIDER=offline only. Kept out of the base install because it adds
+# a large local ML runtime that hosted-embedding deployments do not need.
+offline = [
+  "sentence-transformers>=5.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+# The vendored deepdoc models and dictionaries are not importable modules, so
+# they must be declared explicitly or an install ships code that cannot run.
+visionagent = [
+  "vendor/ragflow/conf/*.json",
+  "vendor/ragflow/rag/res/*",
+  "vendor/ragflow/rag/res/**/*",
+  "vendor/ragflow/deepdoc/parser/resume/entities/res/*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]   # unit only; the e2e suite is at <repo>/test
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers --tb=short -m 'not slow'"
+markers = [
+  "e2e: requires the full stack (Postgres, Elasticsearch, backend on :8000)",
+  "slow: minutes-long; excluded by default, run with `pytest -m slow`",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning",
+  "ignore::UserWarning",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+# Vendored RAGFlow stays outside first-party style and type gates. Narrow
+# project logging/safety adaptations and the two shims that reach first-party
+# code are covered by architecture and regression tests.
+extend-exclude = ["src/visionagent/vendor", "backend/src/visionagent/vendor"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "T20"]
+ignore = [
+  "B008",  # `Depends()` / `Query()` in defaults is the FastAPI idiom
+  "E501",  # long lines; not worth reflowing vendored-adjacent code
+]
+
+[tool.ruff.lint.per-file-ignores]
+# These two journey utilities intentionally print their human-readable report.
+"../test/journey/make_report.py" = ["T201"]
+"../test/journey/test_answer_quality_e2e.py" = ["T201"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+exclude = "src/visionagent/vendor/"
+
+# Adapters over vendored code. Their whole job is to be the typed boundary in
+# front of something untyped, so `disallow_untyped_calls` fires on every call
+# they make by design. Everything else about them is strictly checked.
+[[tool.mypy.overrides]]
+module = [
+  "visionagent.service.vectorstore.elasticsearch.analyzer.ragflow",
+  "visionagent.service.vectorstore.elasticsearch.store",
+  "visionagent.service.evaluator.llm",
+  "visionagent.service.intent.keywords",
+  "visionagent.service.intent.llm",
+  "visionagent.service.parsers.deepdoc",
+  "visionagent.service.parsers.vlm",
+  "visionagent.service.executer.tools.graphrag",
+  "visionagent.service.executer.tools.llm_direct",
+  "visionagent.service.executer.tools.rag",
+  "visionagent.service.executer.tools.web",
+  # These adapters construct the untyped vendored ESConnection directly.
+  "visionagent.api.routes.file_upload_rt",
+  "visionagent.api.routes.history_rt",
+  "visionagent.pipeline.ingest",
+  "visionagent.database.elasticsearch.retrieval",
+  "visionagent.database.elasticsearch.chunks",
+  "visionagent.database.elasticsearch.store",
+]
+disallow_untyped_calls = false
+
+# SQLAlchemy's legacy declarative base is untyped without its mypy plugin.
+[[tool.mypy.overrides]]
+module = [
+  "visionagent.database.postgres.tables",   # declarative_base() is untyped without the sqlalchemy plugin
+]
+ignore_errors = true
+
+[tool.coverage.run]
+source = ["visionagent"]
+# Vendored RAGFlow is third-party code we do not test; including it would make
+# the number describe upstream rather than us.
+omit = ["*/vendor/*"]
+
+[tool.coverage.report]
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+  "\\.\\.\\.",          # Protocol method bodies
+]

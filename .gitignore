@@ -1,0 +1,71 @@
+# User documents are not source. Published parser fixtures live under
+# test/fixtures/ so a clean checkout can execute the baseline without exposing
+# local documents.
+documents/*
+test_image/
+/tmp/
+backend/.env
+frontend/.env
+backend/archive/
+.claude/
+.specstory/
+# Local learning notes are intentionally kept outside the published project.
+/docs/study-notes.md
+backend/temp_uploads/
+# All mutable runtime state: uploads, session context, graph indices.
+backend/var/
+.archive/
+
+# Node dependencies are never source
+node_modules/
+
+# Editor / OS noise
+.DS_Store
+*.log
+
+
+
+# Windows "mark of the web" artifacts
+*:Zone.Identifier
+
+# Evaluation datasets — keep the notebook/code, not the large data
+Evaluation/*.csv
+Evaluation/*.pdf
+
+# Data is never source — keep workbooks on the local drive only. PDFs are
+# ignored where the data lives (documents/, Evaluation/, backend/var/) rather
+# than everywhere, so PDFs under test/fixtures/ are tracked like other fixtures.
+*.xlsx
+~$*.xlsx
+
+# Playwright screenshots produced by test/frontend/e2e
+test/frontend/e2e/screenshots/
+
+# Python / pytest artifacts
+__pycache__/
+.pytest_cache/
+.coverage
+
+# Root .gitattributes owns the precise LFS rules for bundled DeepDoc assets;
+# ignore broader metadata copied by upstream model downloads.
+backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/.gitattributes*
+# Upstream snapshot downloads may include ONNX Runtime's alternate model format.
+backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/*.ort
+
+# Python virtual environments
+.venv/
+venv/
+
+# setuptools build metadata
+*.egg-info/
+
+# Playwright screenshots
+test/frontend/screenshots/
+test/journey/screenshots/
+
+# Downloaded from HuggingFace at runtime -- 2.4 GB, and its own git repo.
+backend/src/visionagent/providers/embedding/models/
+
+# Wheel build output. `uv build` writes a full copy of the package here,
+# including the vendored RAGFlow resource files.
+backend/build/

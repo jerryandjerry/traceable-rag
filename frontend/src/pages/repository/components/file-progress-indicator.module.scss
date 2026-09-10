@@ -1,0 +1,74 @@
+// The four steps on one line, inside a table row.
+.row-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #bfbfbf;
+  white-space: nowrap;
+}
+
+.row-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  &.completed {
+    color: #595959;
+  }
+
+  &.active {
+    color: #262626;
+    font-weight: 500;
+  }
+}
+
+.row-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+  flex-shrink: 0;
+
+  .completed & {
+    background: #595959;
+    border-color: #595959;
+    color: #fff;
+  }
+
+  .active & {
+    background: #262626;
+    border-color: #262626;
+    color: #fff;
+  }
+}
+
+.row-percent {
+  font-variant-numeric: tabular-nums;
+  color: #8c8c8c;
+  font-weight: 400;
+}
+
+.row-connector {
+  width: 16px;
+  height: 1px;
+  background: #e8e8e8;
+  flex-shrink: 0;
+
+  &.completed {
+    background: #595959;
+  }
+}
+
+.row-error {
+  font-size: 12px;
+  color: #cf1322;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+tests/
+src/visionagent/providers/embedding/models/
+src/visionagent/vendor/ragflow/rag/res/deepdoc/.cache/

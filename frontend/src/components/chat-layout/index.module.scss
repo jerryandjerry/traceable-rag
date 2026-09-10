@@ -1,0 +1,66 @@
+.chat-layout {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+
+.chat-layout__left {
+  flex: 2;
+  height: 100%;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.chat-layout__right {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  border-left: 1px solid #e8e8e8;
+  background-color: #fafafa;
+}
+
+// Retracted state: a thin rail that puts the panel back.
+.chat-layout__rail {
+  flex: 0 0 32px;
+  height: 100%;
+  border: none;
+  border-left: 1px solid #e8e8e8;
+  background-color: #fafafa;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+  color: #595959;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.chat-layout__rail-label {
+  writing-mode: vertical-rl;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.chat-layout__right-header {
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e8;
+  background-color: #fff;
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #262626;
+  }
+}
+
+.chat-layout__right-content {
+  padding: 16px;
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}

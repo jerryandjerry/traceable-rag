@@ -1,0 +1,17 @@
+.ant-btn-color-primary.ant-btn-variant-text {
+  --ant-color-link: var(
+    --ant-color-primary
+  ); // antd maps primary text buttons to the link color.
+}
+
+.ant-dropdown-menu {
+  color: white;
+  background-color: black;
+  --ant-color-bg-elevated: black;
+  --ant-color-text: white;
+  --ant-control-item-bg-hover: rgba(255, 255, 255, 0.3);
+}
+
+.ant-message-notice-content .anticon {
+  color: #374151 !important;
+}

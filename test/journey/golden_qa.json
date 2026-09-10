@@ -1,0 +1,99 @@
+{
+  "document": "Doc1.pdf",
+  "source": "RAGFlow benchmark fixture Doc1, commit c178cdd5b91c1c0adc2ee7c5451841565da59790",
+  "note": "Twelve questions: eight the document answers and four it does not. `gold` is a phrase from the passage that must reach the answer's cited context; `expect_*` describes what a correct answer states. The unanswerable questions require the answer to identify the gap without falsely claiming that no document was provided.",
+  "questions": [
+    {
+      "id": "q01",
+      "question": "What is RAGFlow designed to turn raw documents into?",
+      "gold": "turn raw documents into reliable context",
+      "expect_all": ["reliable", "context"],
+      "why": "The document's opening purpose statement."
+    },
+    {
+      "id": "q02",
+      "question": "What kind of files can the assistant answer questions from while staying grounded?",
+      "gold": "answer questions using your private files",
+      "expect_all": ["private", "files"],
+      "expect_any": ["grounded", "source"],
+      "why": "Connects the private-file use case to source grounding."
+    },
+    {
+      "id": "q03",
+      "question": "After documents are ingested into a dataset, what preparation does the system perform for search?",
+      "gold": "chunks and indexes the content for search",
+      "expect_all": ["parse", "clean", "chunk", "index"],
+      "why": "Requires all four preparation actions rather than a generic ingestion summary."
+    },
+    {
+      "id": "q04",
+      "question": "At question time, what does RAGFlow retrieve and send to the model?",
+      "gold": "retrieves the most relevant passages and sends them to the model as context",
+      "expect_all": ["passages", "context"],
+      "why": "Pins the retrieval-to-generation handoff."
+    },
+    {
+      "id": "q05",
+      "question": "What two benefits does the document associate with retrieved source excerpts?",
+      "gold": "reduces hallucinations and improves traceability",
+      "expect_all": ["hallucination", "traceability"],
+      "why": "Tests both the accuracy and auditability claims."
+    },
+    {
+      "id": "q06",
+      "question": "Which complex PDF contents does RAGFlow say it can handle beyond plain text?",
+      "gold": "PDFs with tables, images, and mixed layouts",
+      "expect_all": ["tables", "images"],
+      "expect_any": ["mixed layouts", "mixed layout"],
+      "why": "Checks the document-understanding examples."
+    },
+    {
+      "id": "q07",
+      "question": "Which four capabilities make up the end-to-end pipeline named in the document?",
+      "gold": "data ingestion, retrieval, chat, and agent style orchestration",
+      "expect_all": ["ingestion", "retrieval", "chat"],
+      "expect_any": ["agent style", "agent-style", "orchestration"],
+      "why": "Requires the complete capability list."
+    },
+    {
+      "id": "q08",
+      "question": "What does the parsing pipeline convert heterogeneous files into?",
+      "gold": "structured text chunks that are ready for retrieval, ranking, and quoting",
+      "expect_all": ["structured", "chunks", "retrieval", "ranking"],
+      "expect_any": ["quoting", "quote"],
+      "why": "Pins the parser's output and its downstream uses."
+    },
+    {
+      "id": "q09",
+      "question": "What embedding model does this document require RAGFlow to use?",
+      "unanswerable": true,
+      "must_not_contain": ["no document was provided", "no actual document", "no document has been", "no document specifying", "was not attached", "no document was attached", "no file was provided", "no file has been provided", "no file was attached", "no file was uploaded", "no file has been uploaded", "no document was uploaded"],
+      "expect_any": ["does not", "do not", "not specify", "not state", "not provide", "doesn't", "not mention", "not contain", "not address", "silent on", "no specific", "not appear", "no information", "not included", "don't cover", "not cover", "cannot", "can't", "not available", "isn't available", "unavailable"],
+      "why": "The document mentions embeddings but names no model."
+    },
+    {
+      "id": "q10",
+      "question": "What default chunk size does this document prescribe?",
+      "unanswerable": true,
+      "must_not_contain": ["no document was provided", "no actual document", "no document has been", "no document specifying", "was not attached", "no document was attached", "no file was provided", "no file has been provided", "no file was attached", "no file was uploaded", "no file has been uploaded", "no document was uploaded"],
+      "expect_any": ["does not", "do not", "not specify", "not state", "not provide", "doesn't", "not mention", "not contain", "not address", "silent on", "no specific", "not appear", "no information", "not included", "don't cover", "not cover", "cannot", "can't", "not available", "isn't available", "unavailable"],
+      "why": "Chunking is named, but no size or unit is given."
+    },
+    {
+      "id": "q11",
+      "question": "Which vector database does this document say RAGFlow must use?",
+      "unanswerable": true,
+      "must_not_contain": ["no document was provided", "no actual document", "no document has been", "no document specifying", "was not attached", "no document was attached", "no file was provided", "no file has been provided", "no file was attached", "no file was uploaded", "no file has been uploaded", "no document was uploaded"],
+      "expect_any": ["does not", "do not", "not specify", "not state", "not provide", "doesn't", "not mention", "not contain", "not address", "silent on", "no specific", "not appear", "no information", "not included", "don't cover", "not cover", "cannot", "can't", "not available", "isn't available", "unavailable"],
+      "why": "The document describes indexing without naming a database."
+    },
+    {
+      "id": "q12",
+      "question": "What benchmark accuracy score does the document report for RAGFlow?",
+      "unanswerable": true,
+      "must_not_contain": ["no document was provided", "no actual document", "no document has been", "no document specifying", "was not attached", "no document was attached", "no file was provided", "no file has been provided", "no file was attached", "no file was uploaded", "no file has been uploaded", "no document was uploaded"],
+      "expect_any": ["does not", "do not", "not specify", "not state", "not provide", "doesn't", "not mention", "not contain", "not address", "silent on", "no specific", "not appear", "no information", "not included", "don't cover", "not cover", "cannot", "can't", "not available", "isn't available", "unavailable"],
+      "why": "No benchmark or numeric accuracy result appears in the fixture."
+    }
+  ]
+}

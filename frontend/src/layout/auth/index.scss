@@ -1,0 +1,19 @@
+.auth-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    flex-shrink: 0;
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 0;
+    overflow: hidden;
+  }
+}

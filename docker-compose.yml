@@ -1,0 +1,70 @@
+# Full local stack. Reads backend/.env; copy backend/.env.example to start.
+#
+#   docker compose up -d es01 postgres     # datastores only, run the API on the host
+#   docker compose up -d                   # everything
+
+name: visionagent
+
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION:-8.11.3}
+    env_file: backend/.env
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+      - cluster.routing.allocation.disk.watermark.low=5gb
+      - cluster.routing.allocation.disk.watermark.high=3gb
+      - cluster.routing.allocation.disk.watermark.flood_stage=2gb
+    ports:
+      - "${ES_PORT:-9200}:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    mem_limit: 1.5g
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 60
+
+  postgres:
+    image: postgres:15-alpine
+    env_file: backend/.env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-visionagent}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  backend:
+    build:
+      context: ./backend
+    env_file: backend/.env
+    environment:
+      # Runtime state lives on the mounted volume, never inside the image.
+      # One root, so there is one thing to mount and one thing to back up.
+      - STATE_DIR=/var/lib/visionagent
+    ports:
+      - "8000:8000"
+    volumes:
+      - state:/var/lib/visionagent
+    depends_on:
+      es01:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+volumes:
+  esdata:
+  pgdata:
+  state:

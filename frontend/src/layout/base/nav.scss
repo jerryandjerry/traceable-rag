@@ -1,0 +1,59 @@
+.base-layout-nav {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background-color: #fafbff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
+
+  .base-layout-nav__item {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #eee;
+    }
+    &:active {
+      background-color: #ddd;
+    }
+
+    // One size for every icon in the rail -- antd defaults to the 14px body
+    // font, which read as much smaller than the 40px svgs they replaced.
+    .anticon {
+      font-size: 20px;
+      color: #262626;
+    }
+  }
+
+  .base-layout-nav__open {
+    width: 54px;
+    height: 54px;
+    border-radius: 8px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #333;
+    }
+    &:active {
+      background-color: #666;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+  }
+}

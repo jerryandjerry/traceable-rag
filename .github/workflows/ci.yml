@@ -1,0 +1,118 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/traceable_rag_test
+      ES_URL: http://localhost:9200
+      DASHSCOPE_API_KEY: test-key
+      DASHSCOPE_BASE_URL: https://example.invalid/v1
+      EMBEDDING_MODEL: test-embedding
+      EMBEDDING_DIM: "1024"
+      RERANK_MODEL: test-reranker
+      CHAT_MODEL: test-chat
+      CHAT_MODEL_TURBO: test-chat-turbo
+      STATE_DIR: ${{ github.workspace }}/.traceable-rag-state
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: true
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11.16"
+
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: "0.10.2"
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      - name: Install
+        run: uv sync --project backend --locked --extra dev
+
+      # Lint and type checks need no services. They run first so a formatting
+      # mistake fails in seconds rather than after the model downloads.
+      - name: Lint
+        working-directory: backend
+        run: uv run --locked ruff check src tests ../test
+
+      # Run from backend/ so mypy loads backend/pyproject.toml, including the
+      # strict settings and the narrow adapters-over-vendor exemptions.
+      - name: Typecheck (strict)
+        working-directory: backend
+        run: uv run --locked mypy src
+
+      - name: Dependency audit
+        working-directory: backend
+        # NLTK has no fixed release for PYSEC-2026-3740. The affected model
+        # save/load APIs are not used; this project only tokenizes and lemmatizes.
+        # Audit the hash-pinned lock export so strict mode never has to skip the
+        # editable local project (strict treats every skipped item as fatal).
+        run: >-
+          uv export --locked --extra dev --no-emit-project --no-annotate --no-header |
+          uv run --locked pip-audit --strict -r /dev/stdin --disable-pip
+          --require-hashes --ignore-vuln PYSEC-2026-3740
+
+      # Unit tests import the vendored deepdoc package, which needs NLTK
+      # corpora that are not pip dependencies.
+      - name: NLTK corpora
+        run: uv run --project backend --locked python backend/scripts/setup_nltk.py
+
+      # The e2e suite lives at <repo>/test and is not run here: it needs
+      # Postgres, Elasticsearch, a live API and provider credentials. Static
+      # golden assertions remain in unit tests; the real-PDF replay has its own
+      # explicit step below.
+      - name: Unit tests
+        working-directory: backend
+        run: uv run --locked pytest tests/unit -q --cov=visionagent --cov-report=term-missing --cov-fail-under=45
+
+      - name: Architecture and pipeline integration
+        run: uv run --project backend --locked python -m pytest test/architecture test/pipeline -q
+
+      - name: Offline golden compatibility
+        run: make test-golden
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install
+        working-directory: frontend
+        run: npm ci
+
+      - name: Unit tests
+        working-directory: frontend
+        run: npx vitest run
+
+      - name: Lint
+        working-directory: frontend
+        run: npm run lint
+
+      - name: Typecheck and build
+        working-directory: frontend
+        run: npm run build

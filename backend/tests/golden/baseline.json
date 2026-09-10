@@ -1,0 +1,237 @@
+{
+  "analyzer": {
+    "": {
+      "content_tokens": "",
+      "content_tokens_fine": ""
+    },
+    "2+2": {
+      "content_tokens": "2 2",
+      "content_tokens_fine": "2 2"
+    },
+    "Accessibility studies analysing pedestrian R-4 zoning": {
+      "content_tokens": "access studi analys pedestrian r 4 zone",
+      "content_tokens_fine": "access studi analys pedestrian r 4 zone"
+    },
+    "Curb extensions reduce crossing distances": {
+      "content_tokens": "curb extens reduc cross distanc",
+      "content_tokens_fine": "curb extens reduc cross distanc"
+    },
+    "Tangent curb taper": {
+      "content_tokens": "tangent curb taper",
+      "content_tokens_fine": "tangent curb taper"
+    },
+    "The sidewalks widths shall be 1.8m minimum": {
+      "content_tokens": "the sidewalk width shall be 1 8m minimum",
+      "content_tokens_fine": "the sidewalk width shall be 1 8m minimum"
+    },
+    "建筑设计规范": {
+      "content_tokens": "建筑设计 规范",
+      "content_tokens_fine": "建筑 设计 规范"
+    }
+  },
+  "es_document": {
+    "fields": [
+      "chunk_id",
+      "content_ltks",
+      "content_sm_ltks",
+      "content_with_weight",
+      "create_time",
+      "create_timestamp_flt",
+      "doc_id",
+      "docnm",
+      "docnm_tks",
+      "id",
+      "image",
+      "important_kwd",
+      "important_tks",
+      "kb_id",
+      "page_num",
+      "question_kwd",
+      "question_tks",
+      "ref_images",
+      "top_int"
+    ],
+    "vector_dim": 1024,
+    "vector_fields": [
+      "q_1024_vec"
+    ]
+  },
+  "parse_by_platform": {
+    "darwin-arm64-py311": {
+      "Doc1.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "98bf0ec65312088d071e428935b22a088b556aca9a1c31d27f23a41a2b57b2a7",
+            "content_tokens": "pdf 1 purpos of ragflow ragflow is an open sourc retriev augment gener rag engin design to turn raw document into reliabl context for larg languag model it purpos is to make it practic to build an al assist that can answer question use your privat file while stay ground in the sourc materi in a typic workflow you ingest document into a dataset the system pars and clean them then chunk and index the content for search at question time ragflow retriev the most relev passag and send them to the model a context thi reduc hallucin and improv traceabl becaus answer can be tie back to specif excerpt often with citat ragflow focu on deep document understand so it can handl complex format beyond plain text such a pdf with tabl imag and mix layout it provid an end to end pipelin data ingest retriev chat and agent style orchestr it also expos user interfac and apl so team can experi quickli then operation the same flow in product for a pars test the key idea is that the platform convert heterogen file into structur text chunk that are readi for retriev rank and quot",
+            "content_tokens_fine": "pdf 1 purpos of ragflow ragflow is an open sourc retriev augment gener rag engin design to turn raw document into reliabl context for larg languag model it purpos is to make it practic to build an al assist that can answer question use your privat file while stay ground in the sourc materi in a typic workflow you ingest document into a dataset the system pars and clean them then chunk and index the content for search at question time ragflow retriev the most relev passag and send them to the model a context thi reduc hallucin and improv traceabl becaus answer can be tie back to specif excerpt often with citat ragflow focu on deep document understand so it can handl complex format beyond plain text such a pdf with tabl imag and mix layout it provid an end to end pipelin data ingest retriev chat and agent style orchestr it also expos user interfac and apl so team can experi quickli then operation the same flow in product for a pars test the key idea is that the platform convert heterogen file into structur text chunk that are readi for retriev rank and quot",
+            "doc_name_tokens": "doc1",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              70,
+              103,
+              182,
+              258
+            ]
+          }
+        ],
+        "source_sha256": "e9642829132ab617b158271fd841abe83d2d4a948ee01d97f3a2fc14b836570f"
+      },
+      "Doc2.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "81f4e2af0a246982be9db4d5e290ca412e5a28e26f195149055df5d7abf3594d",
+            "content_tokens": "pdf 2 definit of rag retriev augment gener usual call rag is a pattern for build al system that answer question with help from an extern knowledg base instead of reli onli on what a model learn dure train a rag system first retriev relev inform from your document or databas then us that retriev materi to gener the final answer a simpl rag loop ha four step first you ingest content and creat an index often use embed in a vector store sometim combin with keyword search second the user ask a question third the system retriev the best match passag final the model gener a respons condit on those passag rag is use becaus it improv accuraci keep answer up to date a your data chang and provid a path to citat and audit it can also help enforc access control by retriev onli what the user is allow to see common us includ intern knowledg assist custom support bot research tool and document analysi workflow in evalu team measur retriev qualiti answer faith and latenc to confirm the system stay reliabl at scale good system add guardrail such a citat requir answer refus when evid is miss and clear log for troubleshoot",
+            "content_tokens_fine": "pdf 2 definit of rag retriev augment gener usual call rag is a pattern for build al system that answer question with help from an extern knowledg base instead of reli onli on what a model learn dure train a rag system first retriev relev inform from your document or databas then us that retriev materi to gener the final answer a simpl rag loop ha four step first you ingest content and creat an index often use embed in a vector store sometim combin with keyword search second the user ask a question third the system retriev the best match passag final the model gener a respons condit on those passag rag is use becaus it improv accuraci keep answer up to date a your data chang and provid a path to citat and audit it can also help enforc access control by retriev onli what the user is allow to see common us includ intern knowledg assist custom support bot research tool and document analysi workflow in evalu team measur retriev qualiti answer faith and latenc to confirm the system stay reliabl at scale good system add guardrail such a citat requir answer refus when evid is miss and clear log for troubleshoot",
+            "doc_name_tokens": "doc2",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              71,
+              103,
+              182,
+              258
+            ]
+          }
+        ],
+        "source_sha256": "546bf0c9840c4ec3e6e8f77c4c26e6f1dc65fa40fbfc0d33baeba7e5bec87a55"
+      },
+      "Doc3.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "fb4aceb69e4b96de73891340fb835439d132d4fe97855809d6b19546fa666d68",
+            "content_tokens": "pdf 3 infiniflow compani histori infiniflow is the compani behind the open sourc project infin and ragflow public profil describ infiniflow a an al infrastructur provid headquart in shanghai china found in 2023 the team s earli work focus on the data layer need for retriev augment gener in late 2023 infiniflow open sourc infin an al nativ databas design to support rag style workload includ fast search and effici index soon after the compani expand from databas infrastructur into an end to end rag applic stack on april 1 2024 infiniflow open sourc ragflow a a complet rag engin the project emphas deep document understand a robust ingest pipelin and retriev that can support enterpris use case sinc the open sourc releas ragflow ha grown rapidli on github and is maintain in the public infiniflow organ alongsid document and frequent version releas in practic thi histori reflect a move from build the foundat storag and retriev to deliv a full develop platform today infiniflow posit ragflow a a context layer for al agent combin ingest index retriev and chat or agent workflow into one platform the compani continu to publish tutori releas note and improv that track the fast pace of the open sourc ecosystem",
+            "content_tokens_fine": "pdf 3 infiniflow compani histori infiniflow is the compani behind the open sourc project infin and ragflow public profil describ infiniflow a an al infrastructur provid headquart in shanghai china found in 2023 the team s earli work focus on the data layer need for retriev augment gener in late 2023 infiniflow open sourc infin an al nativ databas design to support rag style workload includ fast search and effici index soon after the compani expand from databas infrastructur into an end to end rag applic stack on april 1 2024 infiniflow open sourc ragflow a a complet rag engin the project emphas deep document understand a robust ingest pipelin and retriev that can support enterpris use case sinc the open sourc releas ragflow ha grown rapidli on github and is maintain in the public infiniflow organ alongsid document and frequent version releas in practic thi histori reflect a move from build the foundat storag and retriev to deliv a full develop platform today infiniflow posit ragflow a a context layer for al agent combin ingest index retriev and chat or agent workflow into one platform the compani continu to publish tutori releas note and improv that track the fast pace of the open sourc ecosystem",
+            "doc_name_tokens": "doc3",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              71,
+              101,
+              166,
+              246,
+              339
+            ]
+          }
+        ],
+        "source_sha256": "f956e3c7204d072de501309754689a08c6db4a67d83e591b199e330f89745cc2"
+      }
+    },
+    "linux-x86_64-py311": {
+      "Doc1.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "5b93b0c57f9832e5b4a7e3d086c523bb49d8535db51fdcd9530ef49f3aec8e74",
+            "content_tokens": "pdf 1 purpos of ragflow ragflow is an open sourc retriev augment gener rag engin design to turn raw document into reliabl context for larg languag model it purpos is to make it practic to build an al assist that can answer question use your privat file while stay ground in the sourc materi in a typic workflow you ingest document into a dataset the system pars and clean them then chunk and index the content for search at question time ragflow retriev the most relev passag and send them to the model a context thi reduc hallucin and improv traceabl becaus answer can be tie back to specif excerpt often with citat ragflow focu on deep document understand so it can handl complex format beyond plain text such a pdf with tabl imag and mix layout it provid an end to end pipelin data ingest retriev chat and agent style orchestr lt also expos user interfac and apl so team can experi quickli then operation the same flow in product for a pars test the key idea is that the platform convert heterogen file into structur text chunk that are readi for retriev rank and quot",
+            "content_tokens_fine": "pdf 1 purpos of ragflow ragflow is an open sourc retriev augment gener rag engin design to turn raw document into reliabl context for larg languag model it purpos is to make it practic to build an al assist that can answer question use your privat file while stay ground in the sourc materi in a typic workflow you ingest document into a dataset the system pars and clean them then chunk and index the content for search at question time ragflow retriev the most relev passag and send them to the model a context thi reduc hallucin and improv traceabl becaus answer can be tie back to specif excerpt often with citat ragflow focu on deep document understand so it can handl complex format beyond plain text such a pdf with tabl imag and mix layout it provid an end to end pipelin data ingest retriev chat and agent style orchestr lt also expos user interfac and apl so team can experi quickli then operation the same flow in product for a pars test the key idea is that the platform convert heterogen file into structur text chunk that are readi for retriev rank and quot",
+            "doc_name_tokens": "doc1",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              70,
+              103,
+              181,
+              258
+            ]
+          }
+        ],
+        "source_sha256": "e9642829132ab617b158271fd841abe83d2d4a948ee01d97f3a2fc14b836570f"
+      },
+      "Doc2.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "31db731882b6e13cbd4b9aae15c3ae1993b692cc7d42aecb01946866cf3f2fb3",
+            "content_tokens": "pdf 2 definit of rag retriev augment gener usual call rag is a pattern for build al system that answer question with help from an extern knowledg base instead of reli onli on what a model learn dure train a rag system first retriev relev inform from your document or databas then us that retriev materi to gener the final answer a simpl rag loop ha four step first you ingest content and creat an index often use embed in a vector store sometim combin with keyword search second the user ask a question third the system retriev the best match passag final the model gener a respons condit on those passag rag is use becaus it improv accuraci keep answer up to date a your data chang and provid a path to citat and audit lt can also help enforc access control by retriev onli what the user is allow to see common us includ intern knowledg assist custom support bot research tool and document analysi workflow in evalu team measur retriev qualiti answer faith and latenc to confirm the system stay reliabl at scale good system add guardrail such a citat requir answer refus when evid is miss and clear log for troubleshoot",
+            "content_tokens_fine": "pdf 2 definit of rag retriev augment gener usual call rag is a pattern for build al system that answer question with help from an extern knowledg base instead of reli onli on what a model learn dure train a rag system first retriev relev inform from your document or databas then us that retriev materi to gener the final answer a simpl rag loop ha four step first you ingest content and creat an index often use embed in a vector store sometim combin with keyword search second the user ask a question third the system retriev the best match passag final the model gener a respons condit on those passag rag is use becaus it improv accuraci keep answer up to date a your data chang and provid a path to citat and audit lt can also help enforc access control by retriev onli what the user is allow to see common us includ intern knowledg assist custom support bot research tool and document analysi workflow in evalu team measur retriev qualiti answer faith and latenc to confirm the system stay reliabl at scale good system add guardrail such a citat requir answer refus when evid is miss and clear log for troubleshoot",
+            "doc_name_tokens": "doc2",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              71,
+              103,
+              181,
+              258
+            ]
+          }
+        ],
+        "source_sha256": "546bf0c9840c4ec3e6e8f77c4c26e6f1dc65fa40fbfc0d33baeba7e5bec87a55"
+      },
+      "Doc3.pdf": {
+        "chunk_count": 1,
+        "chunks": [
+          {
+            "content_sha256": "76fbc9226b7e7238952a4ce5378ac8732b3b5522e18c8ef5111cf12126de4445",
+            "content_tokens": "pdf 3 infiniflow compani histori infiniflow is the compani behind the open sourc project infin and ragflow public profil describ infiniflow a an al infrastructur provid headquart in shanghai china found in 2023 the team s earli work focus on the data layer need for retriev augment gener in late 2023 infiniflow open sourc infin an al nativ databas design to support rag style workload includ fast search and effici index soon after the compani expand from databas infrastructur into an end to end rag applic stack on april 1 2024 infiniflow open sourc ragflow a a complet rag engin the project emphas deep document understand a robust ingest pipelin and retriev that can support enterpris use case sinc the open sourc releas ragflow ha grown rapidli on github and is maintain in the public infiniflow organ alongsid document and frequent version releas in practic thi histori reflect a move from build the foundat storag and retriev to deliv a full develop platform today infiniflow posit ragflow a a context layer for al agent combin ingest index retriev and chat or agent workflow into one platform the compani continu to publish tutori releas note and improv that track the fast pace of the open sourc ecosystem",
+            "content_tokens_fine": "pdf 3 infiniflow compani histori infiniflow is the compani behind the open sourc project infin and ragflow public profil describ infiniflow a an al infrastructur provid headquart in shanghai china found in 2023 the team s earli work focus on the data layer need for retriev augment gener in late 2023 infiniflow open sourc infin an al nativ databas design to support rag style workload includ fast search and effici index soon after the compani expand from databas infrastructur into an end to end rag applic stack on april 1 2024 infiniflow open sourc ragflow a a complet rag engin the project emphas deep document understand a robust ingest pipelin and retriev that can support enterpris use case sinc the open sourc releas ragflow ha grown rapidli on github and is maintain in the public infiniflow organ alongsid document and frequent version releas in practic thi histori reflect a move from build the foundat storag and retriev to deliv a full develop platform today infiniflow posit ragflow a a context layer for al agent combin ingest index retriev and chat or agent workflow into one platform the compani continu to publish tutori releas note and improv that track the fast pace of the open sourc ecosystem",
+            "doc_name_tokens": "doc3",
+            "has_image": true,
+            "page_nums": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "ref_image_count": 0,
+            "top_offsets": [
+              71,
+              101,
+              166,
+              246,
+              339
+            ]
+          }
+        ],
+        "source_sha256": "f956e3c7204d072de501309754689a08c6db4a67d83e591b199e330f89745cc2"
+      }
+    }
+  },
+  "runtime_assets": {
+    "backend/src/visionagent/vendor/ragflow/9b5ad71b2ce5302211f9c61530b329a4922fc6a4": "223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/det.onnx": "30a86f5731181461d08021402766601e4302a9b9b9666be8aff402696339cdff",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/layout.onnx": "de401c03ee30b1c120416dc06f0705237f0c36d3cdb692c9bfefe8a8f98a4b70",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/ocr.res": "28b2362ad4ab2dc38769aa72feb535e3a9ddb3fd2a7585a05920e6393b1dc7f7",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/rec.onnx": "1c7cf60de2afd728d512f4190cf37455092b45f06175365c6fc58d8cd7e2a68b",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/tsr.onnx": "1585f88015c60209f16a079a26d944afca790ab7022fe7d0574113ccb9a6f9b4",
+    "backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/updown_concat_xgb.model": "50516159cd0aab5f3499e1edccffdf1d6141f5ae513fdba003a18cbefa823f62",
+    "backend/src/visionagent/vendor/ragflow/rag/res/huqie.txt": "c0b19769ba86db1fd5d6aa14db7ffbe2cafcc39ac0b03003f0add8bc929bab0a",
+    "backend/src/visionagent/vendor/ragflow/rag/res/huqie.txt.trie": "32ab213044af4aee58c46b4bfa4d2b61ba740ce8c894bb96e80fad00f145bcc4"
+  },
+  "schema_version": 3
+}

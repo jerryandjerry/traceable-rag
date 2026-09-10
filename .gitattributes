@@ -1,0 +1,7 @@
+*.pdf binary
+
+# Bundled parser binaries. Keep source and dictionaries in ordinary Git while
+# routing only the opaque DeepDoc runtime assets through Git LFS.
+backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/*.onnx filter=lfs diff=lfs merge=lfs -text
+backend/src/visionagent/vendor/ragflow/rag/res/deepdoc/*.model filter=lfs diff=lfs merge=lfs -text
+backend/src/visionagent/vendor/ragflow/rag/res/huqie.txt.trie filter=lfs diff=lfs merge=lfs -text
